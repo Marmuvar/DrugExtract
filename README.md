@@ -55,7 +55,8 @@ The ingredient and packaging information were usable as described in the data ac
 
 <!--ts-->
 
-| Constraint | Rationale |
+| Constraint | Rationale |  
+| --- | --- |
 | Distinct products are defined by the application number and route of administration. | Establishes a consistent drug product identification |
 | Duplicated entries based on application number, product number, and drug substance are limited to the first occurrence | Eliminates redundancy of the data file while recognizing status quo at time of application submission. |
 | Where multiple strengths are issued to an application on multiple dates, only the earliest date will be considered|The thesis considers only the primary activities required for the initial drug approval. Adding a drug strength to an application often relies on significant existing research. Further, they are less likely to be impacted by patents due to elapsed time for patent expiry. |
@@ -65,4 +66,3 @@ The ingredient and packaging information were usable as described in the data ac
 
 <!--te-->
 
-```
