@@ -62,10 +62,7 @@ The ingredient and packaging information were usable as described in the data ac
 | Where the sponsor’s name changes due to a company action, the original name of the applicant will be retained. | The thesis considers only the corporate identity at the time of approval. Although the industry has trended towards consolidation, the ability of smaller companies to produce generic products contrasts efficiencies established at larger companies. |
 | For predictive models, only products for which the original branded product remains marketed will be considered. | This ensures formulation information is available based on the removal of discontinued products from the label database. |
 | For predictive models, where multiple reference products are available, the product with the earliest approval date will be used as a reference. | This ensures a consistent starting point to determine opportunities for generic entry. |
-<<<<<<< HEAD
 
 <!--te-->
-=======
->>>>>>> 3099aa2ee65bc0e198694592c5d89888578ffb89
 
 ```
