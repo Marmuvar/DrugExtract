@@ -53,13 +53,16 @@ Column spacing for each .pdf file was manually determined and used as a predefin
 
 The ingredient and packaging information were usable as described in the data acquisition section.  Additional steps for cleaning, consistency, and consolidation were performed on data extracted from the Orange Book.  Cleaning steps ensured similar punctuation used for separators and eliminated excess whitespace from fields.  Also, legal entity designations "CORP", "CO", "INC", "LTD", "LLC", and "GLOBAL" were removed from sponsor names.  While these terms may reflect changes in underlying operating principles or business units in a company, it was decided to minimize identity changes related to a legal status.  Consistency steps addressed FDA's gradual standardization of dosage form descriptions, administrative updates, and changes in company names.  Due to a wide range of administrative routes listed for injectable, intravenous, and oral products, a number of low frequency categories were reduced to more general classifications.  Similar condensation of oral dosage form routes were made.  Changes in entries occurring across editions are described in Table \@ref(tab:Constraints).  Last, consolidation steps eliminated duplicate entries present following the previous standardization steps.  
 
+<!--ts-->
 
-|Constraint|Rationale|
-|Distinct products are defined by the application number and route of administration.|Establishes a consistent drug product identification|
-|Duplicated entries based on application number, product number, and drug substance are limited to the first occurrence|Eliminates redundancy of the data file while recognizing status quo at time of application submission.|
-|Where multiple strengths are issued to an application on multiple dates, only the earliest date will be considered|The thesis considers only the primary activities required for the initial drug approval. Adding a drug strength to an application often relies on significant existing research. Further, they are less likely to be impacted by patents due to elapsed time for patent expiry.|
-|Where the sponsor’s name changes due to a company action, the original name of the applicant will be retained.|The thesis considers only the corporate identity at the time of approval. Although the industry has trended towards consolidation, the ability of smaller companies to produce generic products contrasts efficiencies established at larger companies.|
-|For predictive models, only products for which the original branded product remains marketed will be considered.|This ensures formulation information is available based on the removal of discontinued products from the label database.|
-|For predictive models, where multiple reference products are available, the product with the earliest approval date will be used as a reference.|This ensures a consistent starting point to determine opportunities for generic entry.|
+| Constraint | Rationale |
+| Distinct products are defined by the application number and route of administration. | Establishes a consistent drug product identification |
+| Duplicated entries based on application number, product number, and drug substance are limited to the first occurrence | Eliminates redundancy of the data file while recognizing status quo at time of application submission. |
+| Where multiple strengths are issued to an application on multiple dates, only the earliest date will be considered|The thesis considers only the primary activities required for the initial drug approval. Adding a drug strength to an application often relies on significant existing research. Further, they are less likely to be impacted by patents due to elapsed time for patent expiry. |
+| Where the sponsor’s name changes due to a company action, the original name of the applicant will be retained. | The thesis considers only the corporate identity at the time of approval. Although the industry has trended towards consolidation, the ability of smaller companies to produce generic products contrasts efficiencies established at larger companies. |
+| For predictive models, only products for which the original branded product remains marketed will be considered. | This ensures formulation information is available based on the removal of discontinued products from the label database. |
+| For predictive models, where multiple reference products are available, the product with the earliest approval date will be used as a reference. | This ensures a consistent starting point to determine opportunities for generic entry. |
+
+<!--te-->
 
 ```
