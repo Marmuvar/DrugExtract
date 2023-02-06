@@ -1,4 +1,8 @@
-# Drug Extract
+# DrugExtract
+
+## Overview
+
+My [thesis studying pharmaceutical competition](https://github.com/Marmuvar/GenRxPredict/blob/main/Benmuvhar-Classification%20of%20Generic%20Manufacturers%20and%20Competition%20in%20the%20Pharmaceutical%20Industry.pdf) relied upon data compiled from annual reports from the United States Food and Drug Administration.  The DrugExtract module describes the data sources and custom python code used to parse .pdf format files.  From these, individual line items are extracted from whitespace-delimited tables having irregular entries. Subsequent steps eliminate duplicates and perform limited data cleaning.
 
 ## Background
 
@@ -8,32 +12,30 @@ Common details in each section include the drug substance name, unique applicati
 
 The Prescription Drug Product section includes the following fields:
 
-\textbf{Route of Administration}:  The FDA uses specific terms for how a product is introduced to the body.  This broadly differentiates products taken by mouth (oral), injected into the bloodstream (intravenous), and similar demarcations.  
+**Route of Administration:**  The FDA uses specific terms for how a product is introduced to the body.  This broadly differentiates products taken by mouth (oral), injected into the bloodstream (intravenous), and similar demarcations.  
 
-\textbf{Dosage Form}:  Products intended for each route of administration may take different forms.  For example, orally administered products comprises both liquids, tablets, and capsules taken by mouth.      
+**Dosage Form:**  Products intended for each route of administration may take different forms.  For example, orally administered products comprises both liquids, tablets, and capsules taken by mouth.      
 
-\textbf{Drug Product Name}: Commercial names for the product may either be an invented trade name for the brand product, such as the cholesotrol drug Lipitor, or the name of the drug substance used in the generic product, such as acetaminophen, found in the pain treatment Tylenol.  Because the product names are not unique, they can be ignored in the analysis for this report.
+**Drug Product Name:** Commercial names for the product may either be an invented trade name for the brand product, such as the cholesotrol drug Lipitor, or the name of the drug substance used in the generic product, such as acetaminophen, found in the pain treatment Tylenol.  Because the product names are not unique, they can be ignored in the analysis for this report.
 
-\textbf{Reference Designation}:  For each unique drug substance, route of administration, and dosage form, the FDA must designate one or more products as the reference product for subsequent generic products to test against.  In certain cases, a separate product receives designation as a reference standard due to discontinuance of the original reference product or the replacement of the reference product with newer products that follow modern application requirements.
+**Reference Designation:**  For each unique drug substance, route of administration, and dosage form, the FDA must designate one or more products as the reference product for subsequent generic products to test against.  In certain cases, a separate product receives designation as a reference standard due to discontinuance of the original reference product or the replacement of the reference product with newer products that follow modern application requirements.
 
-\textbf{Therapeutic Equivalence Code}: Where multiple product sources exist for a drug substance and route of administration, the FDA assigns a two letter equivalence code, such as "AB".  Generally, the first letter represents whether product substitutions are allowed ("A") or forbidden ("B"), while the second letter represents the route of administration.  Due to differences in physiological absorption or performance, a suffixed digit may differentiate product classes within the same drug substance and administration route category.  Similarly, differences in product performance may lead to the FDA adjudicating that a generic cannot be substituted for the brand.  
+**Therapeutic Equivalence Code:** Where multiple product sources exist for a drug substance and route of administration, the FDA assigns a two letter equivalence code, such as "AB".  Generally, the first letter represents whether product substitutions are allowed ("A") or forbidden ("B"), while the second letter represents the route of administration.  Due to differences in physiological absorption or performance, a suffixed digit may differentiate product classes within the same drug substance and administration route category.  Similarly, differences in product performance may lead to the FDA adjudicating that a generic cannot be substituted for the brand.  
 
-\textbf{Sponsor Name}:  A product's sponsor is responsible for submission and maintenance of the application.  Due to changes in corporate identity due to merger or restructuring, the sponsor name may change across editions of the Orange Book. 
+**Sponsor Name:**  A product's sponsor is responsible for submission and maintenance of the application.  Due to changes in corporate identity due to merger or restructuring, the sponsor name may change across editions of the Orange Book. 
 
-\textbf{Approval Date}:  The approval date occurs when the FDA provides marketing authorization for a product after application review.   
+**Approval Date:**  The approval date occurs when the FDA provides marketing authorization for a product after application review.   
 
 The discontinued product section duplicates entries of the prescription drug product list except that bioequivalence codes are unlisted.  Individual product codes and strengths under an application may be withdrawn from the market while others remain marketed.  The year of discontinuance is not reported and must be implied from the Orange Book edition in which the item first occurs.   
 
 The section entitled Prescription and OTC Drug Product Patent and Exclusivity List enumerates the following details:
 
-\textbf{Patent Number and Expiration Date}:  For each application and product number (strength), the assigned patent number and patent expiration date are listed.  In rare cases, patent numbers may not apply to each strength in an application.  Multiple patents may be assigned to a single drug product;   
+**Patent Number and Expiration Date:**  For each application and product number (strength), the assigned patent number and patent expiration date are listed.  In rare cases, patent numbers may not apply to each strength in an application.  Multiple patents may be assigned to a single drug product;   
+**Patent Codes:**  Codes describe if a patent pertains to the drug substance, the drug product (dosage form), or therapeutic usage area.  The usage code may be one of over 3000 four digit codes that correspond to a brief description of the clinical or treatment aspects claimed by a patent.  For example: "U-2627: Topical treatment of plaque psoriasis in patients 12 years and older."  Multiple usage codes may be assigned to a single patent;
 
-\textbf{Patent Codes}:  Codes describe if a patent pertains to the drug substance, the drug product (dosage form), or therapeutic usage area.  The usage code may be one of over 3000 four digit codes that correspond to a brief description of the clinical or treatment aspects claimed by a patent.  For example: "U-2627: Topical treatment of plaque psoriasis in patients 12 years and older."  Multiple usage codes may be assigned to a single patent;  
-\textbf{Exclusivity Codes and Expiration Date}:  Exclusivity periods represent statutory prohibitions that prevent the FDA from approving generic products for a certain time period.  These arise from laws enabling new molecule development, treatment of rare diseases, clinical studies in pediatric populations, and other reasons.  Exclusivity periods may run concurrently or in serial with patents.  Multiple exclusivity codes may be assigned to a single patent.  Certain exclusivity codes, such as those for pediatric exclusivity or orphan drug designations, may be assigned to the drug product rather than a patent and are listed as independent line items.  
+**Exclusivity Codes and Expiration Date:**  Exclusivity periods represent statutory prohibitions that prevent the FDA from approving generic products for a certain time period.  These arise from laws enabling new molecule development, treatment of rare diseases, clinical studies in pediatric populations, and other reasons.  Exclusivity periods may run concurrently or in serial with patents.  Multiple exclusivity codes may be assigned to a single patent.  Certain exclusivity codes, such as those for pediatric exclusivity or orphan drug designations, may be assigned to the drug product rather than a patent and are listed as independent line items.  
 
 While the FDA maintains an electronic database of the Orange Book, the online version only captures data for the current year. Certain details are deprecated following periodic updates. As patents expire, they are removed from the online listing. As products are removed from the market, the equivalence relationship between branded and generic products is removed. To develop a comprehensive review of historical applications, it was necessary to perform data extraction from PDF renditions of the Orange Book. Historical editions were made available online via a regulatory law firm (Hyman, Phelps, McNamarra) following a Freedom of Information Act request to the FDA for electronic copies.  Due to illegibility of the original scans, data could not be extracted from editions prior to the 25th edition.  However, an archival project existed online that captured key elements of the patent history (Drug Database, N.D).  Researchers for this database had also encountered legibility challenges and had performed manual entry.  In turn, a portion of these entries were manually against the Orange Book and acceptable supplements for the extracted patent information.   
-
-A description of the parsed data is presented in Table \@ref(tab:OBSummary). Details related to data extraction from the PDF file and associated challenges are reported in Section 4 - Methods.  
 
 ## Data Acquisition  
 Data extraction and limited cleaning was first performed using custom Python applications. Separate applications were to parse product labels, active product records, discontinued product records, and patent information.  These applications implemented standard libraries including numpy, pandas, os, and re.  Other packages are discussed in the descriptions of each application.  
@@ -51,30 +53,13 @@ Column spacing for each .pdf file was manually determined and used as a predefin
 
 The ingredient and packaging information were usable as described in the data acquisition section.  Additional steps for cleaning, consistency, and consolidation were performed on data extracted from the Orange Book.  Cleaning steps ensured similar punctuation used for separators and eliminated excess whitespace from fields.  Also, legal entity designations "CORP", "CO", "INC", "LTD", "LLC", and "GLOBAL" were removed from sponsor names.  While these terms may reflect changes in underlying operating principles or business units in a company, it was decided to minimize identity changes related to a legal status.  Consistency steps addressed FDA's gradual standardization of dosage form descriptions, administrative updates, and changes in company names.  Due to a wide range of administrative routes listed for injectable, intravenous, and oral products, a number of low frequency categories were reduced to more general classifications.  Similar condensation of oral dosage form routes were made.  Changes in entries occurring across editions are described in Table \@ref(tab:Constraints).  Last, consolidation steps eliminated duplicate entries present following the previous standardization steps.  
 
-```{r Constraints, include=TRUE}
-tibble(Constraint = c("Distinct products are defined by the application number and route of administration.",
-                      "Duplicated entries based on application number, product number, and drug substance are limited to the first occurrence",
-                      "Where multiple strengths are issued to an application on multiple dates, only the earliest date will be considered",
-                      "Where the sponsor’s name changes due to a company action, the original name of the applicant will be retained.",
-                      paste0("Only products for which the original branded product remains marketed will be considered.", 
-                             !!footnote_marker_number(1, format = "latex", double_escape = FALSE)),
-                      paste0("Where multiple reference products are available, ",
-                      "the product with the earliest approval date will be used as a reference.", 
-                            !!footnote_marker_number(1, format = "latex", double_escape = FALSE))),
-       Rationale = c("Establishes a consistent drug product identification",
-                     "Eliminates redundancy of the data file while recognizing status quo at time of application submission.",
-                     "The thesis considers only the primary activities required for the initial drug approval. Adding a drug strength to an application often relies on significant existing research. Further, they are less likely to be impacted by patents due to elapsed time for patent expiry. ",
-                     "The thesis considers only the corporate identity at the time of approval. Although the industry has trended towards consolidation, the ability of smaller companies to produce generic products contrasts efficiencies established at larger companies.",
-                     "This ensures formulation information is available based on the removal of discontinued products from the label database.",
-                     "This ensures a consistent starting point to determine opportunities for generic entry.  ")) %>%
-  kbl(booktabs = TRUE, 
-      caption = "Constraints to Ensure Consistency among Orange Book Editions",
-      position = "!ht",
-      linesep = c("\\hline"),
-      escape = FALSE) %>%
-  kable_styling(full_width = F) %>%
-  column_spec(1, width = "3.2in") %>%
-  column_spec(2, width = "3.2in") %>%
-  footnote(number = c("Constraint applied only for predictive model development"), escape = FALSE
-                      )
+
+|Constraint|Rationale|
+|Distinct products are defined by the application number and route of administration.|Establishes a consistent drug product identification|
+|Duplicated entries based on application number, product number, and drug substance are limited to the first occurrence|Eliminates redundancy of the data file while recognizing status quo at time of application submission.|
+|Where multiple strengths are issued to an application on multiple dates, only the earliest date will be considered|The thesis considers only the primary activities required for the initial drug approval. Adding a drug strength to an application often relies on significant existing research. Further, they are less likely to be impacted by patents due to elapsed time for patent expiry.|
+|Where the sponsor’s name changes due to a company action, the original name of the applicant will be retained.|The thesis considers only the corporate identity at the time of approval. Although the industry has trended towards consolidation, the ability of smaller companies to produce generic products contrasts efficiencies established at larger companies.|
+|For predictive models, only products for which the original branded product remains marketed will be considered.|This ensures formulation information is available based on the removal of discontinued products from the label database.|
+|For predictive models, where multiple reference products are available, the product with the earliest approval date will be used as a reference.|This ensures a consistent starting point to determine opportunities for generic entry.|
+
 ```
