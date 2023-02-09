@@ -82,25 +82,28 @@ Changes in entries occurring across editions are described in the following tabl
 
 ## Additional Work
 
-*This module supplements product ingredient listings and packaging information parsed from .xml renditions of the product labels.
-*Separate code in R consolidates the parsed data with patent data listed from Drug Database.
-*Other cleaning steps were performed in R based on data analysis directives.  
+* This module supplements product ingredient listings and packaging information parsed from .xml renditions of the product labels.  
+
+* Separate code in R consolidates the parsed data with patent data listed from Drug Database.  
+
+* Other cleaning steps were performed in R based on data analysis directives.  
 
 
 ## Outcomes
 The extraction modules parsed and consolidated Orange Book entries as follows:  
 
-| | Marketed Products | Discontinued Products Patents|
-| Line Items | |285407 | 222169 | 182713 |
-| Unique Products, Manufacturers, and Strengths | 71321 | 53339 | 76366 |
-| Unique Products and Manufacturers | 32510 | 20940 | 2628 |
-| Unique Patents | | NA | NA | 40165 |
+| - | Marketed Products | Discontinued Products | Patents |  
+| --- | --- |  --- | --- |
+| Line Items | 285407 | 222169 | 182713 |  
+| Unique Products, Manufacturers, and Strengths | 71321 | 53339 | 76366 |  
+| Unique Products and Manufacturers | 32510 | 20940 | 2628 |  
+| Unique Patents | NA | NA | 40165 |  
 
 ## Code and Operation
 
 [Codebase for project](/Code)
 
-| Jupiter Notebook Name (without version) | Description |  
+| Jupyter Notebook Name (without version) | Description |  
 | --- | --- |
 | pdf_read_product /n pdf_read_patent /n pdf_read_discnt | Parse Orange Book reports for individual sections | 
 | modify_prod_csv | Clean field names and spacing in product files |
