@@ -73,10 +73,10 @@ Changes in entries occurring across editions are described in the following tabl
 | --- | --- |
 | Distinct products are defined by the application number and route of administration. | Establishes a consistent drug product identification |
 | Duplicated entries based on application number, product number, and drug substance are limited to the first occurrence | Eliminates redundancy of the data file while recognizing status quo at time of application submission. |
-| Where multiple strengths are issued to an application on multiple dates, only the earliest date will be considered| The thesis considers only the primary activities required for the initial drug approval. Adding a drug strength to an application often relies on significant existing research. Further, they are less likely to be impacted by patents due to elapsed time for patent expiry. |
-| Where the sponsor’s name changes due to a company action, the original name of the applicant will be retained. | The thesis considers only the corporate identity at the time of approval. The impact of consolidation or divestiture is unknown |
+| Where multiple strengths of a product are approved on multiple dates, only the earliest date will be considered | Most work occurs before the initial drug approval. Drug strengths added later to an application often build upon significant work. Further, they don't share a common baseline for comparison to patent expiry. |
+| Where the sponsor’s name changes due to a company action, the original name of the applicant will be retained. | Ensures a consistent corporate identity across references. The impact of consolidation or divestiture is unknown |
 | For predictive models, only products for which the original branded product remains marketed will be considered. | This ensures formulation information is available based on the removal of discontinued products from the label database. |
-| For predictive models, where multiple reference products are available, the product with the earliest approval date will be used as a reference. | This ensures a consistent starting point to determine opportunities for generic entry. |
+| For predictive models where multiple reference products exist for a product, the earliest approved reference will be used. | Ensures a consistent starting point for determining generic entry |
 
 <!--te-->
 
@@ -112,7 +112,6 @@ The extraction modules parsed and consolidated Orange Book entries as follows:
 ### Directory Structure  
 
 The directory structure was not optimized during project development and requires some manual file movement.
-
 
 .pdf versions of the FDA Orange Book saved under subdirectory:  
 OrangeBook/Testing 
