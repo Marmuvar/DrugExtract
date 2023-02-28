@@ -105,9 +105,9 @@ The extraction modules parsed and consolidated Orange Book entries as follows:
 
 | Jupyter Notebook Name (without version) | Description |  
 | --- | --- |
-| pdf_read_product /n pdf_read_patent /n pdf_read_discnt | Parse Orange Book reports for individual sections | 
+| pdf_read_product \n pdf_read_patent \n pdf_read_discnt | Parse Orange Book reports for individual sections | 
 | modify_prod_csv | Clean field names and spacing in product files |
-| thesis_filter_prods /n thesis_filter_dnc /n thesis_filter_pats | Consolidate and standardize entries from multiple volumes |
+| thesis_filter_prods \n thesis_filter_dnc \n thesis_filter_pats | Consolidate and standardize entries from multiple volumes |
 
 ### Directory Structure  
 
